@@ -15,7 +15,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [tempUnit, setTempUnit] = useState(`°C`);
 
-  const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
+  const API_KEY = `YOUR API KEY`;
 
   const showForecastInC = () => {
     let API_Unit = 'metric';
@@ -75,27 +75,6 @@ const App = () => {
         )
       })
   }
-
-  // const showForecastInC = () => {
-  //   let API_Unit = 'metric';
-  //   setTempUnit('°C');
-  //   getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-  //     ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  // }
-
-  // const showForecastInF = () => {
-  //   let API_Unit = 'imperial';
-  //   setTempUnit('°F');
-  //   getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-  //     ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  // }
-
-  // const showForecastInK = () => {
-  //   let API_Unit = 'standart';
-  //   setTempUnit('K');
-  //   getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-  //     ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  // }
 
   const createCountryCodes = arr => {
     return arr.map(el => {
