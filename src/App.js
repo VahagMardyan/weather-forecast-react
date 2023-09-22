@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from 'react';
 import { countries, toCapitalize } from './countries';
-import {GrLocation} from 'react-icons/gr';
+import { GrLocation } from 'react-icons/gr';
 import './App.css';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
       .then(response => response.json())
       .then(result => {
         setWeatherData(
-          result.list.map((el,i) => {
+          result.list.map((el, i) => {
             return (
               <div key={i}>
                 <h3>{el['dt_txt']}</h3>
@@ -41,6 +41,11 @@ const App = () => {
               </div>
             )
           })
+        )
+      })
+      .catch(() => {
+        setWeatherData(
+          <h1 style={{ color: 'red' }}>The city "{cityRef.current.value}" was not found 😥</h1>
         )
       })
   }
