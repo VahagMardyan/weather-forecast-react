@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { countries, toCapitalize } from './countries';
 import { GrLocation } from 'react-icons/gr';
 import './App.css';
@@ -14,29 +14,9 @@ const App = () => {
   const [searchedCountries, setSearchedCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tempUnit, setTempUnit] = useState(`°C`);
+  const [API_Unit, setAPI_Unit] = useState('metric');
 
   const API_KEY = `YOUR API KEY`;
-
-  const showForecastInC = () => {
-    let API_Unit = 'metric';
-    setTempUnit('°C');
-    getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-      ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  }
-
-  const showForecastInF = () => {
-    let API_Unit = 'imperial';
-    setTempUnit('°F');
-    getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-      ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  }
-
-  const showForecastInK = () => {
-    let API_Unit = 'standart';
-    setTempUnit('K');
-    getDatas(`https://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value},
-      ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`)
-  }
 
   const getDatas = url => {
     setLoading(true);
@@ -75,6 +55,36 @@ const App = () => {
         )
       })
   }
+
+  const getWeatherData = () => {
+    const cityName = cityRef.current.value;
+    if (cityName) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName},
+          ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`;
+      getDatas(apiUrl);
+    }
+  };
+
+  const showForecastInC = () => {
+    setAPI_Unit('metric');
+    setTempUnit('°C');
+    getWeatherData();
+  }
+
+  const showForecastInF = () => {
+    setAPI_Unit('imperial');
+    setTempUnit('°F');
+  }
+
+  const showForecastInK = () => {
+    setAPI_Unit('standart');
+    setTempUnit('K');
+  }
+
+  useEffect(() => {
+    getWeatherData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tempUnit, API_Unit]);
 
   const createCountryCodes = arr => {
     return arr.map(el => {
