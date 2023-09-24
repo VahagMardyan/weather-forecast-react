@@ -16,7 +16,7 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR API KEY`;
+  const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
 
   const getDatas = url => {
     setLoading(true);
@@ -42,7 +42,10 @@ const App = () => {
                 <p>Min Temp:{Math.round(el.main['temp_min'])}{tempUnit}</p>
                 <p>Max Temp:{Math.round(el.main['temp_max'])}{tempUnit}</p>
                 <hr style={{ width: '100%', border: '1px solid black' }} />
-                <p className="wind-arrow" style={{ transform: `rotate(${el.wind.deg}deg)` }}>&uarr;</p>
+                <p className="wind-arrow" style={{ transform: `rotate(${el.wind.deg}deg)` }} 
+                  title={`wind speed: ${el.wind.speed}${tempUnit === '°C' || tempUnit==='K' ? 'meter/sec' : 'miles/hour'},
+                   ${el.wind.deg}°`}
+                >&uarr;</p>
               </div>
             )
           })
@@ -110,9 +113,9 @@ const App = () => {
   return (
     <Fragment>
       <div className='info'>
-        <input type='text' placeholder='City Name' id='cityName' ref={cityRef} onKeyUp={keyPress} />
+        <input type='text' placeholder='City Name' id='cityName' ref={cityRef} onKeyUp={keyPress} autoCapitalize='on' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
-          onChange={searchCountries}
+          onChange={searchCountries}  autoCapitalize='on'
         />
         <select id='countryCode' ref={selectRef} defaultValue=''>
           <option value='' disabled>Select Country Code (Optional)</option>
