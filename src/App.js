@@ -16,7 +16,7 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR API KEY`;
+  const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
 
   const getDatas = url => {
     setLoading(true);
@@ -27,7 +27,7 @@ const App = () => {
         setForecastData(
           result.list.map((el, i) => {
             return (
-              <div key={i}>
+              <div key={i} className='forecast-block'>
                 <h3>{el['dt_txt']}</h3>
                 <h2>{result.city.name},{result.city.country}
                   <span>
@@ -42,8 +42,8 @@ const App = () => {
                 <p>Min Temp:{Math.round(el.main['temp_min'])}{tempUnit}</p>
                 <p>Max Temp:{Math.round(el.main['temp_max'])}{tempUnit}</p>
                 <hr style={{ width: '100%', border: '1px solid black' }} />
-                <p className="wind-arrow" style={{ transform: `rotate(${el.wind.deg}deg)` }} 
-                  title={`wind speed: ${el.wind.speed}${tempUnit === '°C' || tempUnit==='K' ? 'meter/sec' : 'miles/hour'},
+                <p className="wind-arrow" style={{ transform: `rotate(${el.wind.deg}deg)` }}
+                  title={`wind speed: ${el.wind.speed}${tempUnit === '°C' || tempUnit === 'K' ? 'meter/sec' : 'miles/hour'},
                    ${el.wind.deg}°`}
                 >&uarr;</p>
               </div>
@@ -112,10 +112,10 @@ const App = () => {
 
   return (
     <Fragment>
-      <div className='info'>
+      <header className='info'>
         <input type='text' placeholder='City Name' id='cityName' ref={cityRef} onKeyUp={keyPress} autoCapitalize='on' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
-          onChange={searchCountries}  autoCapitalize='on'
+          onChange={searchCountries} autoCapitalize='on'
         />
         <select id='countryCode' ref={selectRef} defaultValue=''>
           <option value='' disabled>Select Country Code (Optional)</option>
@@ -127,7 +127,7 @@ const App = () => {
         <button id='showInCBtn' onClick={showForecastInF}>Show (&deg;F)</button>
         <button id='showInKBtn' onClick={showForecastInK}>Show (K)</button>
         <button id='resetBtn' onClick={() => window.location.reload()}>Reset Page</button>
-      </div>
+      </header>
       <section className='container'>
         {
           loading ? <h1>Please Wait...</h1> : <Fragment>{forecastData.length !== 0 ? forecastData : <h1>Weather Forecast</h1>}</Fragment>
