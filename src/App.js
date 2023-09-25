@@ -89,7 +89,7 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tempUnit, API_Unit]);
 
-  const createCountryCodes = arr => {
+  const createCountryCodes = (arr) => {
     return arr.map(el => {
       optCount++;
       return (
@@ -108,7 +108,7 @@ const App = () => {
     setSearchedCountries(newCountries);
   }
 
-  const keyPress = event => event.key === 'Enter' ? showForecastInC('°C') : null;
+  const keyPress = (event) => event.key === 'Enter' ? showForecastInC('°C') : null;
 
   return (
     <Fragment>
