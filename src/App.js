@@ -19,16 +19,16 @@ const App = () => {
   const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const focus = (event) => {
       if (event.altKey && event.key === 'l') {
         cityRef.current.focus();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', focus);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', focus);
     };
   }, []);
 
