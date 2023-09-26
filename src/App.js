@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { countries, toCapitalize } from './countries';
-import { GrLocation } from 'react-icons/gr';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 import './App.css';
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
                 <h3>{el['dt_txt']}</h3>
                 <h2>{result.city.name},{result.city.country}
                   <span>
-                    <GrLocation />
+                    <HiOutlineLocationMarker style={{fontSize:'20px',margin:'2px',}}/>
                   </span>
                 </h2>
                 <h4>{el.weather[0].main}</h4>
