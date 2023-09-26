@@ -16,7 +16,21 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR API KEY`;
+  const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.altKey && event.key === 'l') {
+        cityRef.current.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const getDatas = url => {
     setLoading(true);
@@ -31,7 +45,7 @@ const App = () => {
                 <h3>{el['dt_txt']}</h3>
                 <h2>{result.city.name},{result.city.country}
                   <span>
-                    <HiOutlineLocationMarker style={{fontSize:'20px',margin:'2px',}}/>
+                    <HiOutlineLocationMarker style={{ fontSize: '20px', margin: '2px', }} />
                   </span>
                 </h2>
                 <h4>{el.weather[0].main}</h4>
@@ -63,9 +77,9 @@ const App = () => {
     const cityName = cityRef.current.value;
     if (cityName) {
       const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName},
-          ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`;
+        ${selectRef.current.value}&units=${API_Unit}&appid=${API_KEY}`;
       getDatas(apiUrl);
-    }
+    };
   };
 
   const showForecastInC = () => {
@@ -113,7 +127,8 @@ const App = () => {
   return (
     <Fragment>
       <header className='info'>
-        <input type='text' placeholder='City Name' id='cityName' ref={cityRef} onKeyUp={keyPress} autoCapitalize='on' />
+        <input type='text' placeholder='City Name' id='cityName' ref={cityRef} 
+          onKeyUp={keyPress} autoCapitalize='on' title='Search the city (alt+l)' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
           onChange={searchCountries} autoCapitalize='on'
         />
