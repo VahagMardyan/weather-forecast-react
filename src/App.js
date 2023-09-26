@@ -128,9 +128,9 @@ const App = () => {
     <Fragment>
       <header className='info'>
         <input type='text' placeholder='City Name' id='cityName' ref={cityRef} 
-          onKeyUp={keyPress} autoCapitalize='on' title='Search the city (alt+l)' />
+          onKeyUp={keyPress} title='Search the city (alt+l)' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
-          onChange={searchCountries} autoCapitalize='on'
+          onChange={searchCountries}
         />
         <select id='countryCode' ref={selectRef} defaultValue=''>
           <option value='' disabled>Select Country Code (Optional)</option>

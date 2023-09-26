@@ -25,6 +25,7 @@ input {
     border: 1px solid black;
     font-size: 20px;
     border-radius: 20px;
+    text-transform: capitalize;
 }
 
 input::placeholder {
@@ -86,7 +87,6 @@ button {
 
 img {
     width: 50%;
-    filter: brightness(0.85);
 }
 
 @media screen and (max-width:768px) {
