@@ -16,7 +16,7 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR API KEY`;
+  const API_KEY = `413d0defb02ebb494ea5e39ceb810e6b`;
 
   useEffect(() => {
     const focus = (event) => {
@@ -126,7 +126,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <header className='info'>
+      <section className='info'>
         <input type='text' placeholder='City Name' id='cityName' ref={cityRef} 
           onKeyUp={keyPress} title='Search the city (alt+l)' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
@@ -142,7 +142,7 @@ const App = () => {
         <button id='showInCBtn' onClick={showForecastInF}>Show (&deg;F)</button>
         <button id='showInKBtn' onClick={showForecastInK}>Show (K)</button>
         <button id='resetBtn' onClick={() => window.location.reload()}>Reset Page</button>
-      </header>
+      </section>
       <section className='container'>
         {
           loading ? <h1>Please Wait...</h1> : <Fragment>{forecastData.length !== 0 ? forecastData : <h1>Weather Forecast</h1>}</Fragment>
