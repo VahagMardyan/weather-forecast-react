@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { countries, toCapitalize } from './countries';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-import {BiCurrentLocation} from 'react-icons/bi';
+import { BiCurrentLocation } from 'react-icons/bi';
 import './App.css';
 
 const App = () => {
@@ -85,10 +85,12 @@ const App = () => {
         },
         (error) => {
           console.error('Error getting geolocation:', error);
+          window.alert('Error getting your location. Please check your location settings.');
         }
       );
     } else {
       console.error('Geolocation is not supported in this browser.');
+      window.alert('Geolocation is not supported in your browser.');
     }
   };
 
@@ -158,7 +160,7 @@ const App = () => {
           }
         </select>
         <button onClick={showInCurrentLocation} title='Shows the weather in your currect location (in &deg;C)'>
-          <BiCurrentLocation/>
+          <BiCurrentLocation />
         </button>
         <button id='showInCBtn' onClick={showForecastInC}>Show (&deg;C)</button>
         <button id='showInCBtn' onClick={showForecastInF}>Show (&deg;F)</button>
