@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { countries, toCapitalize } from './countries';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import {BiCurrentLocation} from 'react-icons/bi';
 import './App.css';
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR API KEY`;
+  const API_KEY = `YOUR-API-KEY`;
 
   useEffect(() => {
     const focus = (event) => {
@@ -73,6 +74,24 @@ const App = () => {
       })
   }
 
+  const showInCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${API_Unit}&appid=${API_KEY}`;
+          getDatas(apiUrl);
+        },
+        (error) => {
+          console.error('Error getting geolocation:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported in this browser.');
+    }
+  };
+
   const getWeatherData = () => {
     const cityName = cityRef.current.value;
     if (cityName) {
@@ -127,7 +146,7 @@ const App = () => {
   return (
     <Fragment>
       <section className='info'>
-        <input type='text' placeholder='City Name' id='cityName' ref={cityRef} 
+        <input type='text' placeholder='City Name' id='cityName' ref={cityRef}
           onKeyUp={keyPress} title='Search the city (alt+l)' />
         <input type='text' placeholder='Search Country' ref={searchRef} onKeyUp={keyPress}
           onChange={searchCountries}
@@ -138,6 +157,9 @@ const App = () => {
             searchedCountries.length === 0 ? createCountryCodes(countries) : createCountryCodes(searchedCountries)
           }
         </select>
+        <button onClick={showInCurrentLocation} title='Shows the weather in your currect location (in &deg;C)'>
+          <BiCurrentLocation/>
+        </button>
         <button id='showInCBtn' onClick={showForecastInC}>Show (&deg;C)</button>
         <button id='showInCBtn' onClick={showForecastInF}>Show (&deg;F)</button>
         <button id='showInKBtn' onClick={showForecastInK}>Show (K)</button>
