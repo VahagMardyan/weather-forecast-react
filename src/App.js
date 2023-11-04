@@ -17,7 +17,7 @@ const App = () => {
   const [tempUnit, setTempUnit] = useState(`°C`);
   const [API_Unit, setAPI_Unit] = useState('metric');
 
-  const API_KEY = `YOUR-API-KEY`;
+  const API_KEY = `YOUR_API_KEY`;
 
   useEffect(() => {
     const focus = (event) => {
